@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Museo Virtual del Porfiriato</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eee7da;color:#29251f;font-family:Georgia,serif}
+header{padding:42px 20px;text-align:center;background:#29251f;color:#f8f1e5}
+header h1{margin:0 0 10px;font-size:clamp(30px,7vw,54px)}
+header p{max-width:700px;margin:auto;color:#ddd3c4;font:16px system-ui,sans-serif}
+nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:16px;background:#fffaf1;position:sticky;top:0;z-index:2;border-bottom:1px solid #d4c7b3}
+button{min-height:44px;padding:10px 15px;border:1px solid #cbbca7;border-radius:10px;background:#fff;color:#29251f;font-weight:bold;cursor:pointer}
+button.active,button:hover{background:#e8dcc8;border-color:#76552f}
+main{max-width:950px;margin:auto;padding:22px}
+.sala{background:#fffaf1;border:1px solid #d4c7b3;border-radius:16px;padding:24px;margin-bottom:20px}
+.sala.hidden{display:none}.sala h2{margin-top:0;font-size:30px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:18px}
+.card{background:#eee7da;border:1px solid #d4c7b3;border-radius:12px;padding:17px}
+.card h3{margin:0 0 8px}.card p{font:15px/1.5 system-ui,sans-serif;color:#61594f}.info-card{cursor:pointer;transition:.2s}.info-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(60,45,25,.12)}.info-panel{display:none;margin-top:18px;padding:18px;background:#f4ecdf;border:1px solid #d4c7b3;border-radius:12px}.info-panel.show{display:grid;grid-column:1/-1;grid-template-columns:1fr 240px;gap:18px;align-items:center}.info-panel img{width:100%;height:170px;object-fit:cover;border-radius:10px}.info-panel h3{margin-top:0}@media(max-width:650px){.info-panel.show{grid-template-columns:1fr}.info-panel img{height:210px}}
+.timeline{display:grid;gap:10px;margin-top:18px}.event{padding:14px;border-left:4px solid #76552f;background:#eee7da;border-radius:7px;font-family:system-ui,sans-serif}
+.fact{margin-top:18px;padding:15px;background:#e8dcc8;border-radius:10px;font-family:system-ui,sans-serif}
+footer{text-align:center;padding:30px;color:#6b6257;font:14px system-ui,sans-serif}
+
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:20px}
+.photo{margin:0;background:#eee7da;border:1px solid #d4c7b3;border-radius:12px;overflow:hidden}
+.photo img{display:block;width:100%;height:220px;object-fit:cover}
+.photo figcaption{padding:12px;font:14px/1.45 system-ui,sans-serif;color:#61594f}
+.photo strong{display:block;color:#29251f;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header>
+<h1>🏛️ Museo Virtual del Porfiriato</h1>
+<p>Un recorrido interactivo por una etapa de grandes cambios económicos, tecnológicos y sociales en México.</p>
+</header>
+
+<nav aria-label="Salas del museo">
+<button class="active" data-sala="inicio">🏛️ Entrada</button>
+<button data-sala="contexto">📜 Sala 1</button>
+<button data-sala="ferrocarriles">🚂 Sala 2</button>
+<button data-sala="comercio">💰 Sala 3</button>
+<button data-sala="curiosidades">🤯 Sala 4</button>
+<button data-sala="fuentes">📚 Fuentes</button>
+</nav>
+
+<main>
+<section id="inicio" class="sala">
+<h2>Bienvenido al museo</h2>
+<p>Durante el Porfiriato, México experimentó una fuerte transformación de su infraestructura y economía. El desarrollo de los ferrocarriles facilitó el transporte de personas y mercancías y conectó distintas regiones del país.</p>
+<div class="grid">
+<div class="card info-card" data-info="historia"><h3>📜 Historia</h3><p>Toca aquí para ver un resumen breve.</p></div>
+<div class="card info-card" data-info="tecnologia"><h3>🚂 Tecnología</h3><p>Toca aquí para conocer el papel del ferrocarril.</p></div>
+<div class="card info-card" data-info="economia"><h3>💰 Economía</h3><p>Toca aquí para ver su relación con el comercio.</p></div>
+<div class="card info-card" data-info="curiosidades"><h3>🤯 Curiosidades</h3><p>Toca aquí para descubrir un dato breve.</p></div>
+</div>
+<div id="info-historia" class="info-panel"><div><h3>📜 Historia</h3><p>El Porfiriato fue una etapa de transformación de México, especialmente entre 1876 y 1911. Durante esos años crecieron obras de infraestructura y actividades económicas, aunque también existieron desigualdades y conflictos.</p></div><img src="https://cdn.loc.gov/service/pnp/cph/3a20000/3a23000/3a23200/3a23261r.jpg" alt="Retrato histórico de Porfirio Díaz"></div>
+<div id="info-tecnologia" class="info-panel"><div><h3>🚂 Tecnología</h3><p>El ferrocarril fue una de las tecnologías que más transformó los viajes y el transporte de mercancías. Permitió conectar regiones que antes estaban más aisladas.</p></div><img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Mexican_Central_Railway_train.jpg" alt="Locomotora histórica"></div>
+<div id="info-economia" class="info-panel"><div><h3>💰 Economía</h3><p>Las nuevas conexiones facilitaron el traslado de productos agrícolas y minerales hacia ciudades, puertos y otros mercados.</p></div><img src="https://www.shorpy.com/files/images/4a03687a.preview.jpg" alt="Mercado histórico de México"></div>
+<div id="info-curiosidades" class="info-panel"><div><h3>🤯 Curiosidad</h3><p>El ferrocarril no solo transportaba pasajeros: también movía grandes cantidades de mercancías y conectaba zonas productoras con mercados y puertos.</p></div><img src="https://1.bp.blogspot.com/-9sWGWihWnYA/YFpnNp7OQjI/AAAAAAAAFD4/H_L7c6bvKlIAs_5GBHqc2obF3z7sqlt8wCLcBGAsYHQ/s800/descubre-la-historia-del-ferrocarril-en-mexico.jpg" alt="Locomotora histórica en México"></div>
+<div class="fact"><strong>🎟️ Recorrido:</strong> Puedes usar los botones de arriba para entrar a las salas o tocar las tarjetas de abajo para ver información rápida.</div><div class="gallery">
+<figure class="photo"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Mexican_Central_Railway_train.jpg" alt="Locomotora de vapor del Ferrocarril Central Mexicano"><figcaption><strong>🚂 El ferrocarril</strong>Una imagen histórica de una locomotora, símbolo de la expansión ferroviaria.</figcaption></figure>
+<figure class="photo"><img src="https://cdn.loc.gov/service/pnp/cph/3a20000/3a23000/3a23200/3a23261r.jpg" alt="Retrato histórico de Porfirio Díaz"><figcaption><strong>📜 La época</strong>Retrato histórico relacionado con el periodo del Porfiriato.</figcaption></figure>
+</div>
+
+</section>
+
+<section id="contexto" class="sala hidden">
+<h2>📜 Sala 1: Contexto histórico</h2>
+<p>El Porfiriato fue el periodo en el que Porfirio Díaz tuvo una posición dominante en el gobierno mexicano, principalmente entre 1876 y 1911. Durante estos años hubo modernización de infraestructura y crecimiento de algunas actividades económicas, aunque también existieron profundas desigualdades sociales y conflictos políticos.</p>
+<figure class="photo" style="margin-top:18px"><img src="https://cdn.loc.gov/service/pnp/cph/3a20000/3a23000/3a23200/3a23261r.jpg" alt="Retrato histórico de Porfirio Díaz"><figcaption><strong>📜 El periodo</strong>Retrato histórico relacionado con la época del Porfiriato.</figcaption></figure>
+<div class="timeline">
+<div class="event"><strong>1876</strong> — Porfirio Díaz llega al poder.</div>
+<div class="event"><strong>1880</strong> — Se impulsa la expansión de infraestructura y comunicaciones.</div>
+<div class="event"><strong>1900</strong> — La red ferroviaria y las actividades comerciales tienen una expansión importante.</div>
+<div class="event"><strong>1910</strong> — Comienza la Revolución Mexicana.</div>
+<div class="event"><strong>1911</strong> — Porfirio Díaz deja la presidencia.</div>
+</div>
+</section>
+
+<section id="ferrocarriles" class="sala hidden">
+<h2>🚂 Sala 2: Los ferrocarriles</h2>
+<p>El ferrocarril fue una de las principales obras de infraestructura del periodo. Permitió transportar mercancías y personas a distancias mayores y redujo los tiempos de traslado entre regiones.</p>
+<div class="grid">
+<div class="card"><h3>📦 Transporte</h3><p>Facilitó el movimiento de productos agrícolas, minerales y mercancías.</p></div>
+<div class="card"><h3>🗺️ Conexión</h3><p>Conectó zonas productoras con ciudades, puertos y fronteras.</p></div>
+<div class="card"><h3>💵 Inversión</h3><p>La construcción ferroviaria atrajo inversión extranjera y nacional.</p></div>
+<div class="card"><h3>🏭 Industria</h3><p>Ayudó a integrar mercados y favoreció determinadas actividades industriales.</p></div>
+</div>
+<div class="fact"><strong>Dato clave:</strong> El ferrocarril no solo servía para viajar: también era fundamental para llevar productos desde las zonas de producción hasta los mercados.</div><div class="gallery">
+<figure class="photo"><img src="https://1.bp.blogspot.com/-9sWGWihWnYA/YFpnNp7OQjI/AAAAAAAAFD4/H_L7c6bvKlIAs_5GBHqc2obF3z7sqlt8wCLcBGAsYHQ/s800/descubre-la-historia-del-ferrocarril-en-mexico.jpg" alt="Locomotora de vapor histórica en México"><figcaption><strong>🚂 Una red en expansión</strong>La locomotora representa el crecimiento de las conexiones ferroviarias durante la época.</figcaption></figure>
+</div>
+
+</section>
+
+<section id="comercio" class="sala hidden">
+<h2>💰 Sala 3: Comercio</h2>
+<p>La expansión ferroviaria estuvo relacionada con el crecimiento del comercio. Al ser más sencillo transportar mercancías, algunas regiones pudieron integrarse mejor a los mercados nacionales e internacionales.</p>
+<div class="grid">
+<div class="card"><h3>🌾 Productos agrícolas</h3><p>El transporte permitió mover productos del campo hacia centros de consumo.</p></div>
+<div class="card"><h3>⛏️ Minería</h3><p>Los minerales podían trasladarse hacia centros industriales y puertos con mayor facilidad.</p></div>
+<div class="card"><h3>🚢 Puertos</h3><p>Las conexiones ferroviarias ayudaron a relacionar zonas productoras con rutas marítimas.</p></div>
+<div class="card"><h3>🌎 Comercio exterior</h3><p>La infraestructura favoreció la circulación de mercancías vinculadas con mercados internacionales.</p></div>
+</div>
+<div class="gallery">
+<figure class="photo"><img src="https://www.shorpy.com/files/images/4a03687a.preview.jpg" alt="Mercado de San Marcos en México, fotografía histórica"><figcaption><strong>🧺 Comercio cotidiano</strong>Los mercados eran espacios importantes para la circulación y venta de productos.</figcaption></figure>
+</div>
+</section>
+
+<section id="curiosidades" class="sala hidden">
+<h2>🤯 Sala 4: Curiosidades</h2>
+<div class="grid">
+<div class="card"><h3>🚂 No era solo para pasajeros</h3><p>Gran parte de su importancia estaba en transportar mercancías y conectar zonas productoras.</p></div>
+<div class="card"><h3>💰 Inversión extranjera</h3><p>Empresas y capitales extranjeros participaron en distintos proyectos económicos y de infraestructura.</p></div>
+<div class="card"><h3>🗺️ México más conectado</h3><p>El crecimiento ferroviario cambió la manera en que distintas regiones podían comunicarse y comerciar.</p></div>
+<div class="card"><h3>⚖️ Modernización desigual</h3><p>El crecimiento económico no significó que todos los sectores de la población se beneficiaran de la misma manera.</p></div>
+</div>
+<div class="gallery"><figure class="photo"><img src="https://s3.amazonaws.com/s3.timetoast.com/public/uploads/photo/10743444/image/4cda25848e612b72fddb191147d55e71" alt="Locomotora y trabajadores en una vía ferroviaria histórica"><figcaption><strong>👷 Trabajo e infraestructura</strong>La expansión ferroviaria requirió obras, trabajadores y grandes inversiones.</figcaption></figure></div>
+<div class="fact"><strong>👀 Para pensar:</strong> Una misma obra podía representar progreso tecnológico para unos sectores y, al mismo tiempo, generar conflictos por tierras, trabajo y desigualdad.</div>
+</section>
+
+<section id="fuentes" class="sala hidden">
+<p><strong>Material visual:</strong> Las imágenes utilizadas en el museo fueron tomadas de textos históricos digitales, colecciones y publicaciones de divulgación histórica, incluyendo materiales publicados por medios como <em>El Universal</em>. Se utilizaron como apoyo visual para complementar la información histórica presentada.</p>
+
+<h2>📚 Sala 5: Fuentes</h2>
+<p>📖 Fuentes bibliográficas utilizadas para elaborar el contenido del museo:</p><div class="grid">
+<div class="card"><h3>Fuente 1</h3><p>García de Fuentes, A. (1987). <em>La construcción de la red férrea mexicana en el porfiriato: Relaciones de poder y organización capitalista del espacio.</em> Investigaciones Geográficas, (17), 137–154.</p></div>
+<div class="card"><h3>Fuente 2</h3><p>Kuntz Ficker, S. (2000). <em>La redistribución de los cauces del comercio exterior mexicano: Una visión desde la frontera norte (1870–1929).</em> Frontera Norte, 12(24).</p></div>
+<div class="card"><h3>Fuente 3</h3><p>Coatsworth, J. H. (1979). <em>Indispensable railroads in a backward economy: The case of Mexico.</em> The Journal of Economic History, 39(4), 939–960.</p></div>
+</div>
+</section>
+</main>
+<footer>Museo Virtual del Porfiriato · Proyecto escolar</footer>
+
+<script>
+const botones=document.querySelectorAll("[data-sala]");
+const salas=document.querySelectorAll(".sala");
+botones.forEach(b=>b.addEventListener("click",()=>{
+  const id=b.dataset.sala;
+  salas.forEach(s=>s.classList.toggle("hidden",s.id!==id));
+  botones.forEach(x=>x.classList.toggle("active",x===b));
+  document.querySelectorAll(".info-panel").forEach(p=>p.classList.remove("show"));
+  window.scrollTo({top:0,behavior:"smooth"});
+}));
+document.querySelectorAll("[data-info]").forEach(card=>card.addEventListener("click",()=>{
+  const panel=document.getElementById("info-"+card.dataset.info);
+  const wasOpen=panel.classList.contains("show");
+  document.querySelectorAll(".info-panel").forEach(p=>p.classList.remove("show"));
+  if(!wasOpen){
+    card.parentElement.insertBefore(panel,card.nextSibling);
+    panel.classList.add("show");
+  }
+}));
+</script>
+</body>
+</html>
